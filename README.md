@@ -39,19 +39,20 @@ console.log(doesThisMatch); // <----------- false (coolness is over 9000)
 
 ## Built-in formats
 The parameters prefixed by a * are required.
-name (parameters) | condition for obj to match 
----- | ------------------
-Defined | obj is not undefined
-Specific | obj is a given value
-Thruthy | obj is truthy 
-Falsy | obj is falsy
-Bool | obj is a boolean
-Num (min,max,forceInt) | obj is a number between `min` and `max` (included). If `forceInt` is `true`, obj is an integer
-Int (min,max) | obj is an integer between `min` and `max`(included)
-Str (size,min,max,regex) | obj is a string which length is `size` or between `min` and `max` (exact length prevals) and matches `regex`
-Arr (size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals)
-ArrOf (\*insideFormat,size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `insideFormat`
-Or (\*formats) | obj matches one of the formats in the given array `formats`
+
+| name (parameters) | condition for obj to match | 
+| ---- | ------------------ |
+| Defined | obj is not undefined |
+| Specific | obj is a given value |
+| Thruthy | obj is truthy  |
+| Falsy | obj is falsy |
+| Bool | obj is a boolean  |
+| Num (min,max,forceInt) | obj is a number between `min` and `max` (included). If `forceInt` is `true`, obj is an integer  |
+| Int (min,max) | obj is an integer between `min` and `max`(included) |
+| Str (size,min,max,regex) | obj is a string which length is `size` or between `min` and `max` (exact length prevals) and matches `regex` |
+| Arr (size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) |
+| ArrOf (\*insideFormat,size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `insideFormat` |
+| Or (\*formats) | obj matches one of the formats in the given array `formats` |
 
 ## How to add formats
 You can create your own formats simply by extending the `Format` class and precising the `match` method.
