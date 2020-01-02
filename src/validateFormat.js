@@ -164,7 +164,7 @@ class ArrOf extends Arr{
 	}
 }
 
-// Any of the given formats go through
+// Any of the given formats goes through
 class Or extends Format{
 	constructor(formats){
 		super('object');
@@ -172,6 +172,17 @@ class Or extends Format{
 		this.match = function(obj){
 			this.formats.forEach((format)=>{if(format.match(obj)){return true;}});
 			return false;
+		}
+	}
+}
+
+// Anything not validating the given format goes through
+class Not extends Format{
+	constructor(format){
+		super('object');
+		this.format = format;
+		this.match = function(obj){
+			return !this.format.match(obj);
 		}
 	}
 }
@@ -216,6 +227,7 @@ const ValidateFormat = {
 	'Int': Int,
 	'Str': Str,
 	'Arr': Arr,
+	'Not': Not,
 	'Or': Or,
 
 	'validate': validate
