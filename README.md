@@ -31,7 +31,7 @@ const myObject = {
 const myFormat = {
 	name: new val.Str({min: 1, max: 256}),
 	coolness: new val.Num({min: 0, max: 9000}),
-	interests: new val.ArrOf({insideFormat: val.Str({min: 0, max: 256})})
+	interests: new val.ArrOf({format: new val.Str({min: 0, max: 256})})
 };
 const doesThisMatch = val.validate(myObject, myFormat);
 console.log(doesThisMatch); // <----------- false (coolness is over 9000)
