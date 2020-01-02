@@ -3,7 +3,7 @@
 
 ## Usage
 After including validateFormat for usage, just pass the object to be validated as the first parameter of validate and a format to be validated against as the second parameter.
-All the options given to build your formats are enclosed in object litterals. (`{}`)
+All the options given to build your formats are enclosed in object litterals `{}`, except operator formats such as "Not" and "Or" that only recieve one or several format instances as parameters and `Specific` that can only recieve a primitive value.
 The options and usage for built-in formats are given down below.
 
 ### Validating a simple string
@@ -40,19 +40,20 @@ console.log(doesThisMatch); // <----------- false (coolness is over 9000)
 ## Built-in formats
 Parameters prefixed by a * are required.
 
-| name (parameters) | condition for obj to match | 
-| ---- | ------------------ |
-| Defined | obj is not undefined |
-| Specific | obj is a given value |
-| Thruthy | obj is truthy  |
-| Falsy | obj is falsy |
-| Bool | obj is a boolean  |
-| Num (min,max,forceInt) | obj is a number between `min` and `max` (included). If `forceInt` is `true`, obj is an integer  |
-| Int (min,max) | obj is an integer between `min` and `max` (included) |
-| Str (size,min,max,regex) | obj is a string which length is `size` or between `min` and `max` (exact length prevals) and matches `regex` |
-| Arr (size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) |
-| ArrOf (\*insideFormat,size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `insideFormat` |
-| Or (\*formats) | obj matches one of the formats in the given array `formats` |
+| name (parameters) | condition for obj to match | example |
+| ----------------- | -------------------------- | ------- |
+| Defined | obj is not undefined | `new val.Defined()` |
+| Specific | obj is a given value | `new val.Specific(4)` |
+| Thruthy | obj is truthy | `new val.Truthy()` | 
+| Falsy | obj is falsy | `new val.Falsy()` |
+| Bool | obj is a boolean | `new val.Bool()` |
+| Num (min,max,forceInt) | obj is a number between `min` and `max` (included). If `forceInt` is `true`, obj is an integer  | `new val.Num({min: -5.2, max: 9.3})` |
+| Int (min,max) | obj is an integer between `min` and `max` (included) | `new val.Int({min: -1, max: 5})` |
+| Str (size,min,max,regex) | obj is a string which length is `size` or between `min` and `max` (exact length prevals) and matches `regex` | `new val.Str({size: 20, regex: /^\[A-Z\].*\[\.?!\]/})` |
+| Arr (size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) | `new val.Arr({size: 3})` |
+| ArrOf (\*insideFormat,size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `insideFormat` | `new val.ArrOf({size: 2, insideFormat: new val.Num({min: -999, max: 999})})` |
+| Or (\*formats) | obj matches one of the formats in the given array `formats` | `new val.Or(\[new val.Bool(), new val.Specific(-1)\])` |
+| Not (\*format) | obj doesn't match the given `format` | `new val.Not(new val.Specific('Hello I am a hacking bot'))` |
 
 ## How to add formats
 You can create your own formats simply by extending the `Format` class and precising the `match` method.
