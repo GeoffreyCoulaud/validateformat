@@ -48,7 +48,7 @@ The parameters prefixed by a * are required.
 | Falsy | obj is falsy |
 | Bool | obj is a boolean  |
 | Num (min,max,forceInt) | obj is a number between `min` and `max` (included). If `forceInt` is `true`, obj is an integer  |
-| Int (min,max) | obj is an integer between `min` and `max`(included) |
+| Int (min,max) | obj is an integer between `min` and `max` (included) |
 | Str (size,min,max,regex) | obj is a string which length is `size` or between `min` and `max` (exact length prevals) and matches `regex` |
 | Arr (size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) |
 | ArrOf (\*insideFormat,size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `insideFormat` |
