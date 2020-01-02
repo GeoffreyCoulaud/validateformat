@@ -191,11 +191,11 @@ class ArrOf extends Arr{
 		
 		super({'size':size, 'min':min, 'max':max});
 		
-		this.insideFormat = options.insideFormat;
+		this.format = options.format;
 		this.match = function(obj){
 			if (!this.globalMatch(obj)){return false;}
 			for (let item of obj){
-				if (!this.insideFormat.match(item)){return false;};
+				if (!this.format.match(item)){return false;};
 			}
 			return true;
 		}
