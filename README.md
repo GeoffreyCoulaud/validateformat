@@ -69,7 +69,7 @@ class MinMaxFormat extends val.Format{
 		this.min = new val.Num({'min':0, 'max':max});
 		this.max = new val.Num({'min':min, 'max':Number.MAX_SAFE_INTEGER});
 		this.match = function(obj){
-			if (!this.typeMatch()){return false;}
+			if (!this.validateType()){return false;}
 			if (typeof obj.min !== 'number'){return false;}
 			if (typeof obj.max !== 'number'){return false;}
 			return this.min.match(obj.min) && this.max.match(obj.max);
