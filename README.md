@@ -38,7 +38,7 @@ console.log(doesThisMatch); // <----------- false (coolness is over 9000)
 ```
 
 ## Built-in formats
-The parameters prefixed by a * are required.
+Parameters prefixed by a * are required.
 
 | name (parameters) | condition for obj to match | 
 | ---- | ------------------ |
