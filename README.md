@@ -51,7 +51,7 @@ Parameters prefixed by a * are required.
 | Int (min,max) | obj is an integer between `min` and `max` (included) | `new val.Int({min: -1, max: 5})` |
 | Str (size,min,max,regex) | obj is a string which length is `size` or between `min` and `max` (exact length prevals) and matches `regex` | `new val.Str({size: 20, regex: /^\[A-Z\].*\[\.?!\]/})` |
 | Arr (size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) | `new val.Arr({size: 3})` |
-| ArrOf (\*format,size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `insideFormat` | `new val.ArrOf({size: 2, insideFormat: new val.Num({min: -999, max: 999})})` |
+| ArrOf (\*format,size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `format` | `new val.ArrOf({size: 2, insideFormat: new val.Num({min: -999, max: 999})})` |
 | Or (\*formats) | obj matches one of the formats in the given array `formats` | `new val.Or(\[new val.Bool(), new val.Specific(-1)\])` |
 | Not (\*format) | obj doesn't match the given `format` | `new val.Not(new val.Specific('Hello I am a hacking bot'))` |
 
