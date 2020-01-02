@@ -64,14 +64,14 @@ const val = require('validateFormat');
 const MAX_PRICE_OF_ALL_TIME = 100;
 class MinMaxFormat extends val.Format{
 	constructor({min = null, max = null}){
-	  super('object'); // Precising the js type expected
-	  this.min = new val.Num({'min':0, 'max':max});
-	  this.max = new val.Num({'min':min, 'max':Number.MAX_SAFE_INTEGER});
-	  this.match = function(obj){
-				if (typeof obj.min !== 'number'){return false;}
-				if (typeof obj.max !== 'number'){return false;}
-				return this.min.match(obj.min) && this.max.match(obj.max);
-			}
+		super('object'); // Precising the js type expected
+		this.min = new val.Num({'min':0, 'max':max});
+		this.max = new val.Num({'min':min, 'max':Number.MAX_SAFE_INTEGER});
+		this.match = function(obj){
+			if (typeof obj.min !== 'number'){return false;}
+			if (typeof obj.max !== 'number'){return false;}
+			return this.min.match(obj.min) && this.max.match(obj.max);
+		}
 	}
 }
 const userCriteria = {'min':0, 'max':25};
