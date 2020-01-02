@@ -1,6 +1,17 @@
 # ValidateFormat
  Check if the given object matches a given format.
 
+## Installation
+### NPM install
+You can download the npm package
+```
+npm install --save validateformat
+```
+### Manual install
+You can download this repo as a zip from your browser or 
+
+type `git clone https://github.com/GeoffreyCoulaud/ValidateFormat.git` in a terminal in your project folder.
+
 ## Usage
 After including validateFormat for usage, just pass the object to be validated as the first parameter of validate and a format to be validated against as the second parameter.
 All the options given to build your formats are enclosed in object litterals `{}`, except operator formats such as `Not` and `Or` that only recieve one or several format instances as parameters and `Specific` that can only recieve a primitive value.
