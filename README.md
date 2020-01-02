@@ -47,8 +47,8 @@ Parameters prefixed by a * are required.
 | Thruthy | obj is truthy | `new val.Truthy()` | 
 | Falsy | obj is falsy | `new val.Falsy()` |
 | Bool | obj is a boolean | `new val.Bool()` |
-| Num (min,max,forceInt) | obj is a number between `min` and `max` (included). If `forceInt` is `true`, obj is an integer  | `new val.Num({min: -5.2, max: 9.3})` |
-| Int (min,max) | obj is an integer between `min` and `max` (included) | `new val.Int({min: -1, max: 5})` |
+| Num (\*min,\*max,forceInt) | obj is a number between `min` and `max` (included). If `forceInt` is `true`, obj is an integer  | `new val.Num({min: -5.2, max: 9.3})` |
+| Int (\*min,\*max) | obj is an integer between `min` and `max` (included) | `new val.Int({min: -1, max: 5})` |
 | Str (size,min,max,regex) | obj is a string which length is `size` or between `min` and `max` (exact length prevals) and matches `regex` | `new val.Str({size: 20, regex: /^\[A-Z\].*\[\.?!\]/})` |
 | Arr (size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) | `new val.Arr({size: 3})` |
 | ArrOf (\*insideFormat,size,min,max) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `insideFormat` | `new val.ArrOf({size: 2, insideFormat: new val.Num({min: -999, max: 999})})` |
