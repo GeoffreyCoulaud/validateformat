@@ -75,17 +75,26 @@ class Bool extends Format{
 // Numbers go through
 // (You can specify a min, max and force integer or not)
 class Num extends Format{
-	constructor({min, max, forceInt = false}){
+	constructor(options){
 		super('number');
+		
+		let min=null, max=null, forceInt=false;
+		if (typeof options === 'object'){
+			if (options.hasOwnProperty('min')){min=options.min;}
+			if (options.hasOwnProperty('max')){max=options.max;}
+			if (options.hasOwnProperty('forceInt')){forceInt=options.forceInt;}
+		}
+		
 		this.min = min;
 		this.max = max;
 		this.forceInt = forceInt;
+
 		this.match = function(obj){
 			if (!this.validateType(obj)){return false;}
 			if (Number.isNaN(obj)){return false;}
 			if (this.forceInt && !Number.isInteger(obj)){return false;}
-			if (obj < min){return false;}
-			if (obj > max){return false;}
+			if (this.min !== null && obj < this.min){return false;}
+			if (this.max !== null && obj > this.max){return false;}
 			return true;
 		}
 	}
@@ -94,20 +103,31 @@ class Num extends Format{
 // Integers go through
 // (You can specify a min and a max)
 class Int extends Num{
-	constructor({min, max}){
-		super({'min':min, 'max':max, 'forceInt':true});
+	constructor(options){
+		options.forceInt = true;
+		super(options);
 	}
 }
 
 // Strings go through
-// (you can specify a precise size, a min size, a max size and a regex f size is not null, min and max will not be checked)
+// (you can specify a precise size, a min size, a max size and a regex. If size is not null, min and max will not be checked)
 class Str extends Format{
-	constructor({size = null, min = null, max = null, regex = null}){
+	constructor(options){
 		super('string');
+
+		let size=null, min=null, max=null, regex=null;
+		if(typeof options === 'object'){
+			if(options.hasOwnProperty('size')){size=options.size}
+			if(options.hasOwnProperty('min')){min=options.min}
+			if(options.hasOwnProperty('max')){max=options.max}
+			if(options.hasOwnProperty('regex')){regex=options.regex}
+		}
+
 		this.size = size;
 		this.min = min;
 		this.max = max;
 		this.regex = regex;
+		
 		this.match = function(obj){
 			if (!this.validateType(obj)){return false;}
 			if (this.regex !== null){
@@ -116,9 +136,9 @@ class Str extends Format{
 			if (this.size !== null){
 				if (obj.length !== this.size){return false;}
 			} 
-			else if (this.min !== null && this.max !== null) {
-				if (obj.length < this.min){return false;}
-				if (obj.length > this.max){return false;}
+			else {
+				if (this.min !== null && obj.length < this.min){return false;}
+				if (this.max !== null && obj.length > this.max){return false;}
 			}
 			return true;
 		}
@@ -128,19 +148,28 @@ class Str extends Format{
 // Arrays go through
 // (You can specify a size, a min size and a max size, if size is not null, min and max will not be checked)
 class Arr extends Format{
-	constructor({size = null, min = null, max = null}){
+	constructor(options){
 		super('array');
+
+		let size=null, min=null, max=null;
+		if (typeof options === 'object'){
+			if(options.hasOwnProperty(size)){size=options.size};
+			if(options.hasOwnProperty(min)){min=options.min};
+			if(options.hasOwnProperty(max)){max=options.max};
+		}
+
 		this.size = size;
 		this.min = min;
 		this.max = max; 
+		
 		this.globalMatch = function(obj){
 			if (!this.validateType(obj)){return false;}
 			if (this.size !== null){
 				if (obj.length !== this.size){return false;}
 			}
-			else if (this.min !== null && this.max !== null){
-				if (obj.length < this.min){return false;}
-				if (obj.length > this.max){return false;}
+			else {
+				if (this.min !== null && obj.length < this.min){return false;}
+				if (this.max !== null && obj.length > this.max){return false;}
 			}
 			return true;
 		}
@@ -151,9 +180,18 @@ class Arr extends Format{
 // Arrays of specific things go through
 // (Same parameters as Arr, plus insideFormat against all items of the array will be checked)
 class ArrOf extends Arr{
-	constructor({insideFormat, size = null, min = null, max = null}){
+	constructor(options){
+		
+		let size=null, min=null, max=null;
+		if (typeof options === 'object'){
+			if (options.hasOwnProperty('size')){size=options.size;}
+			if (options.hasOwnProperty('min')){min=options.min;}
+			if (options.hasOwnProperty('max')){max=options.max;}
+		}
+		
 		super({'size':size, 'min':min, 'max':max});
-		this.insideFormat = format;
+		
+		this.insideFormat = options.insideFormat;
 		this.match = function(obj){
 			if (!this.globalMatch(obj)){return false;}
 			for (let item of obj){
