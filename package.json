@@ -1,5 +1,5 @@
 {
-  "name": "validateformat",
+  "name": "validate-format",
   "version": "1.0.0",
   "description": "Check if the given object matches a given format",
   "main": "lib/validateFormat.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GeoffreyCoulaud/ValidateFormat.git"
+    "url": "git+https://github.com/GeoffreyCoulaud/validate-format.git"
   },
   "keywords": [
     "validation",
@@ -18,12 +18,8 @@
   "author": "Geoffrey Coulaud",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GeoffreyCoulaud/ValidateFormat/issues"
+    "url": "https://github.com/GeoffreyCoulaud/validate-format/issues"
   },
-  "homepage": "https://github.com/GeoffreyCoulaud/ValidateFormat#readme",
-  "devDependencies": {
-    "@babel/cli": "^7.7.7",
-    "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7"
-  }
+  "homepage": "https://github.com/GeoffreyCoulaud/validate-format#readme",
+  "devDependencies": {}
 }
