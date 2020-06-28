@@ -34,11 +34,22 @@ class Defined extends Format{
 }
 
 // Just a specific value goes through
+const SpecificSupportedTypes = ["undefined", "boolean", "number", "bigint", "string"];
 class Specific extends Format{
 	constructor(value){
+		
+		// Check type of the specific value
+		let t = typeof value;
+		if (!SpecificSupportedTypes.includes(t) && value !== null){
+			throw new TypeError("Supported types for specific formats are : "+SpecificSupportedTypes.join(", ")+" and the `null` value - given "+(t));
+		}
+
 		super(typeof value);
 		this.value = value;
 		this.match = function(obj){
+			if (typeof this.value !== "bigint"){
+				if (isNaN(this.value) && isNaN(obj)){return true;}
+			} 
 			return obj === this.value;
 		}
 	}
