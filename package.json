@@ -4,7 +4,8 @@
   "description": "Check if the given object matches a given format",
   "main": "lib/validateFormat.js",
   "scripts": {
-    "build": "babel src -d lib"
+    "test": "node ./tests/main.js",
+    "test-verbose": "node ./tests/main.js --verbose"
   },
   "repository": {
     "type": "git",

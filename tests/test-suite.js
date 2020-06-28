@@ -6,8 +6,16 @@ function testAndReport(tests){
 	
 	let resCount = {pass: 0, fail: 0}
 
-	for (let test of tests){
+	console.log("Starting tests...");
+
+	for (let i=0; i<tests.length; i++){
+
+		let test = tests[i];
 		
+		if (process.argv.includes("--verbose")){
+			console.log(`Running test ${i}/${tests.length} - ${test.input.humanDesc}`);
+		}
+
 		// Testing input values with the format given and comparing to expected output 
 		let res;
 		try {
@@ -29,9 +37,9 @@ function testAndReport(tests){
 
 	}
 
-	console.log("Test finished.");
-	console.log(`${resCount.pass}/${tests.length} tests passed`);
-	console.log(`${resCount.fail}/${tests.length} tests failed`);
+	console.log("Tests finished !");
+	console.log(`${resCount.pass}/${tests.length} tests passed.`);
+	console.log(`${resCount.fail}/${tests.length} tests failed.`);
 
 	return resCount/tests.length;
 }
