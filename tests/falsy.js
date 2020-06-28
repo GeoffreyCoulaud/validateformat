@@ -33,4 +33,6 @@ const tests = [
 
 module.exports = {tests};
 
-testAndReport(tests);
+if (!module.parent){
+	testAndReport(tests);
+}
