@@ -89,21 +89,29 @@ class Num extends Format{
 	constructor(options){
 		super('number');
 		
-		let min=null, max=null, forceInt=false;
+		let min=null, max=null, forceInt=false, strict=false;
 		if (typeof options === 'object'){
 			if (options.hasOwnProperty('min')){min=options.min;}
 			if (options.hasOwnProperty('max')){max=options.max;}
 			if (options.hasOwnProperty('forceInt')){forceInt=options.forceInt;}
+			if (options.hasOwnProperty('strict')){strict=options.strict;}
 		}
 		
 		this.min = min;
 		this.max = max;
 		this.forceInt = forceInt;
+		this.strict = strict;
 
 		this.match = function(obj){
 			if (!this.validateType(obj)){return false;}
 			if (Number.isNaN(obj)){return false;}
-			if (this.forceInt && !Number.isInteger(obj)){return false;}
+			if (this.forceInt){
+				if (!Number.isInteger(obj)){return false;}
+			}
+			if (this.strict){
+				if (obj === this.min){return false;}
+				if (obj === this.max){return false;}
+			}
 			if (this.min !== null && obj < this.min){return false;}
 			if (this.max !== null && obj > this.max){return false;}
 			return true;

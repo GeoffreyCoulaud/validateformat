@@ -9,6 +9,10 @@ let tests = [
 	require("./truthy.js").tests,
 	require("./falsy.js").tests,
 	require("./boolean.js").tests,
+	require("./number.js").tests,
+	require("./integer.js").tests,
+	require("./string.js").tests,
+	require("./array.js").tests,
 ].flat();
 
 // Run all tests
