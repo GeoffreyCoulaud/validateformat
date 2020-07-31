@@ -3,9 +3,9 @@
 
 
 ## Installation
-You can download validate-format via npm
+You can download validateformat via npm
 ```
-npm install --save validate-format
+npm install --save validateformat
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ The options and usage for built-in formats are given down below.
 
 ### Validating a simple string
 ```js
-const val = require('validate-format');
+const val = require('validateformat');
 const myObject = 'foobar'; 
 const myFormat = new val.Str({'regex':/^f.+r$/});
 const doesThisMatch = val.validate(myObject, myFormat);
@@ -24,7 +24,7 @@ console.log(doesThisMatch); // <----------- true
 
 ### Validating a more complex object
 ```js
-const val = require('validate-format');
+const val = require('validateformat');
 const myObject = {
 	name: 'Geoffrey Coulaud',
 	coolness: 9001,
@@ -68,7 +68,7 @@ You can create your own formats simply by extending the `Format` class and preci
 Lets say you recieve two values from the user, a lowest price (min) and a highest price (max) to filter a database search.
 The minimum price can't be lower than 0, and the maximum price can't be higher than 100, our most expensive product of all time.
 ```js
-const val = require('validate-format');
+const val = require('validateformat');
 const MAX_PRICE_OF_ALL_TIME = 100;
 class MinMaxFormat extends val.Format{
 	constructor({min = null, max = null}){
@@ -100,7 +100,7 @@ Replace everything between `<>` accordingly.
 // <TEST_FILE_DESCRIPTION>
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { <TESTED_FORMAT> } = require("../src/validate-format.js");
+const { <TESTED_FORMAT> } = require("../src/validateformat.js");
 
 const <MY_TESTED_FORMAT_1> = new <TESTED_FORMAT>(<OPTIONS>);
 const <MY_TESTED_FORMAT_2> = new <TESTED_FORMAT>(<OPTIONS_2>);
