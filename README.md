@@ -95,7 +95,7 @@ console.log(doesThisMatch); // <----------- true
 ```
 
 ## How to run the tests and add some
-In the project folder, run `npm run test` or `npm run test-verbose` to run tests. 
+In the project folder, run `npm run test` or `npm run test-verbose` to run tests.  
 To add tests, copy and paste one of the already existing test files in `tests` and rename it. Follow the given syntax, and everything should be fine.
 Don't forget to import it in `tests/main.js` for it to be added to the global tests or you'll have to type `node ./tests/name_of_your_test.js` to run it.
 
