@@ -22,5 +22,6 @@
     "url": "https://github.com/GeoffreyCoulaud/validate-format/issues"
   },
   "homepage": "https://github.com/GeoffreyCoulaud/validate-format#readme",
-  "devDependencies": {}
+  "devDependencies": {},
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }
