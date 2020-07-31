@@ -1,15 +1,15 @@
 {
-  "name": "validate-format",
+  "name": "validateformat",
   "version": "1.0.0",
   "description": "Check if the given object matches a given format",
-  "main": "lib/validateFormat.js",
+  "main": "src/validateformat.js",
   "scripts": {
     "test": "node ./tests/main.js",
     "test-verbose": "node ./tests/main.js --verbose"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GeoffreyCoulaud/validate-format.git"
+    "url": "git+https://github.com/GeoffreyCoulaud/validateformat.git"
   },
   "keywords": [
     "validation",
@@ -19,8 +19,8 @@
   "author": "Geoffrey Coulaud",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GeoffreyCoulaud/validate-format/issues"
+    "url": "https://github.com/GeoffreyCoulaud/validateformat/issues"
   },
-  "homepage": "https://github.com/GeoffreyCoulaud/validate-format#readme",
+  "homepage": "https://github.com/GeoffreyCoulaud/validateformat#readme",
   "devDependencies": {}
 }
