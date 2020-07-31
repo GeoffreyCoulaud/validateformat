@@ -3,15 +3,10 @@
 
 
 ## Installation
-### NPM install
-You can download the npm package
+You can download validate-format via npm
 ```
 npm install --save validate-format
 ```
-### Manual install
-You can download this repo as a zip from your browser or 
-
-type `git clone https://github.com/GeoffreyCoulaud/ValidateFormat.git` in a terminal in your project folder.
 
 ## Usage
 After including validateFormat for usage, just pass the object to be validated as the first parameter of validate and a format to be validated against as the second parameter.
