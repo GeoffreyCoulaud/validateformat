@@ -15,7 +15,7 @@ The options and usage for built-in formats are given down below.
 
 ### Validating a simple string
 ```js
-const val = require('validateFormat');
+const val = require('validate-format');
 const myObject = 'foobar'; 
 const myFormat = new val.Str({'regex':/^f.+r$/});
 const doesThisMatch = val.validate(myObject, myFormat);
@@ -24,7 +24,7 @@ console.log(doesThisMatch); // <----------- true
 
 ### Validating a more complex object
 ```js
-const val = require('validateFormat');
+const val = require('validate-format');
 const myObject = {
 	name: 'Geoffrey Coulaud',
 	coolness: 9001,
@@ -68,7 +68,7 @@ You can create your own formats simply by extending the `Format` class and preci
 Lets say you recieve two values from the user, a lowest price (min) and a highest price (max) to filter a database search.
 The minimum price can't be lower than 0, and the maximum price can't be higher than 100, our most expensive product of all time.
 ```js
-const val = require('validateFormat');
+const val = require('validate-format');
 const MAX_PRICE_OF_ALL_TIME = 100;
 class MinMaxFormat extends val.Format{
 	constructor({min = null, max = null}){
