@@ -1,11 +1,12 @@
 # ValidateFormat
  Check if the given object matches a given format.
 
+
 ## Installation
 ### NPM install
 You can download the npm package
 ```
-npm install --save validateformat
+npm install --save validate-format
 ```
 ### Manual install
 You can download this repo as a zip from your browser or 
@@ -91,4 +92,36 @@ const userCriteria = {'min':0, 'max':25};
 const userCriteriaFormat = new MinMaxFormat({'min':0, 'max':MAX_PRICE_OF_ALL_TIME});
 const doesThisMatch = val.validate(myObj, myFormat);
 console.log(doesThisMatch); // <----------- true
+```
+
+## How to run the tests and add some
+In the project folder, run `npm run test` or `npm run test-verbose` to run tests. 
+To add tests, copy and paste one of the already existing test files in `tests` and rename it. Follow the given syntax, and everything should be fine.
+Don't forget to import it in `tests/main.js` for it to be added to the global tests or you'll have to type `node ./tests/name_of_your_test.js` to run it.
+
+### Base test file syntax
+Replace everything between `<>` accordingly.
+```js 
+// <TEST_FILE_DESCRIPTION>
+
+const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
+const { <TESTED_FORMAT> } = require("../src/validate-format.js");
+
+const <MY_TESTED_FORMAT_1> = new <TESTED_FORMAT>(<OPTIONS>);
+const <MY_TESTED_FORMAT_2> = new <TESTED_FORMAT>(<OPTIONS_2>);
+
+// Values to test and their expected state
+const tests = [
+
+	// ### Evaluated to true :
+	new tr(new ti(<TEST_VALUE_1>, <MY_TESTED_FORMAT_1>, <BOOL_EXPECTED_OUTPUT>, "<TEST_DESC>")),
+
+	// ### Evaluated to false :
+	new tr(new ti(<TEST_VALUE_2>, <MY_TESTED_FORMAT_2>, <BOOL_EXPECTED_OUTPUT>, "<TEST_DESC>")),];
+
+module.exports = {tests};
+
+if (!module.parent){
+	testAndReport(tests);
+}
 ```
