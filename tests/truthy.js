@@ -1,9 +1,9 @@
 // Test to verify that the validate-format.truthy format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Thruthy } = require("../src/validate-format.js");
+const { Truthy } = require("../src/validate-format.js");
 
-const t = new Thruthy();
+const t = new Truthy();
 
 // Values to test and their expected state
 const tests = [

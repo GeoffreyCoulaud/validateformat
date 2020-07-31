@@ -1,4 +1,4 @@
-// Test to verify that the validate-format.num format works as intended.
+// Test to verify that the validate-format.arr format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
 const { Arr } = require("../src/validate-format.js");
@@ -32,7 +32,7 @@ const tests = [
 	new tr(new ti([], shortArr, false, "Arrays shorter than min should not match")),
 	new tr(new ti([1,2,3,4,5,6,7,8,9,10,11], shortArr, false, "Arrays larger than max should not match")),
 	new tr(new ti([1,2,3], preciseArr, false, "Arrays of length different than size should not match")),
-	new tr(new ti([1,2,3,4,5,6], preciseArr, false, "Precie lentgh prevals over min/max")),
+	new tr(new ti([1,2,3,4,5,6], preciseArr, false, "Precie length prevals over min/max")),
 	
 ];
 

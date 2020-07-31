@@ -56,7 +56,7 @@ class Specific extends Format{
 }
 
 // Anything truthy goes through
-class Thruthy extends Format{
+class Truthy extends Format{
 	constructor(){
 		super('object');
 		this.match = function(obj){
@@ -170,18 +170,17 @@ class Arr extends Format{
 	constructor(options){
 		super('array');
 
-		let size=null, min=null, max=null;
-		if (typeof options === 'object'){
-			if(options.hasOwnProperty(size)){size=options.size};
-			if(options.hasOwnProperty(min)){min=options.min};
-			if(options.hasOwnProperty(max)){max=options.max};
-		}
+		this.size=null;
+		this.min=null;
+		this.max=null;
 
-		this.size = size;
-		this.min = min;
-		this.max = max; 
+		if (typeof options === 'object'){
+			if(options.hasOwnProperty('size')){this.size = options.size};
+			if(options.hasOwnProperty('min')){this.min = options.min};
+			if(options.hasOwnProperty('max')){this.max = options.max};
+		}
 		
-		this.globalMatch = function(obj){
+		this.match = function(obj){
 			if (!this.validateType(obj)){return false;}
 			if (this.size !== null){
 				if (obj.length !== this.size){return false;}
@@ -192,7 +191,6 @@ class Arr extends Format{
 			}
 			return true;
 		}
-		this.match = this.globalMatch;
 	}
 }
 
@@ -209,10 +207,11 @@ class ArrOf extends Arr{
 		}
 		
 		super({'size':size, 'min':min, 'max':max});
+		this.origMatch = this.match;
 		
 		this.format = options.format;
 		this.match = function(obj){
-			if (!this.globalMatch(obj)){return false;}
+			if (!this.origMatch(obj)){return false;}
 			for (let item of obj){
 				if (!this.format.match(item)){return false;};
 			}
@@ -223,11 +222,13 @@ class ArrOf extends Arr{
 
 // Any of the given formats goes through
 class Or extends Format{
-	constructor(formats){
+	constructor(){
 		super('object');
-		this.formats = formats;
+		this.formats = Array.from(arguments);
 		this.match = function(obj){
-			this.formats.forEach((format)=>{if(format.match(obj)){return true;}});
+			for (let format of this.formats){
+				if (format.match(obj)){return true;}
+			}
 			return false;
 		}
 	}
@@ -276,7 +277,7 @@ const ValidateFormat = {
 
 	'Specific': Specific,
 	'Defined': Defined,
-	'Thruthy': Thruthy,
+	'Truthy': Truthy,
 	'Falsy': Falsy,
 	'ArrOf': ArrOf,
 	'Bool': Bool,

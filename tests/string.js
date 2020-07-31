@@ -1,4 +1,4 @@
-// Test to verify that the validate-format.num format works as intended.
+// Test to verify that the validate-format.str format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
 const { Str } = require("../src/validate-format.js");

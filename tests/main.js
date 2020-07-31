@@ -13,6 +13,9 @@ let tests = [
 	require("./integer.js").tests,
 	require("./string.js").tests,
 	require("./array.js").tests,
+	require("./arrayOf.js").tests,
+	require("./or.js").tests,
+	require("./not.js").tests,
 ].flat();
 
 // Run all tests
