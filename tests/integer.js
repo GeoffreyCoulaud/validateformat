@@ -1,7 +1,7 @@
-// Test to verify that the validate-format.int format works as intended.
+// Test to verify that the validateformat.int format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Int } = require("../src/validate-format.js");
+const { Int } = require("../src/validateformat.js");
 
 const zeroTen = new Int({min: 0, max: 10});
 const zeroTenEx = new Int({min: 0, max: 10, strict: true});

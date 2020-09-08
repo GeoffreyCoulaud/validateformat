@@ -1,7 +1,7 @@
-// Test to verify that the validate-format.specific format works as intended.
+// Test to verify that the validateformat.specific format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Specific } = require("../src/validate-format.js");
+const { Specific } = require("../src/validateformat.js");
 
 // Values to test and their expected state
 const tests = [

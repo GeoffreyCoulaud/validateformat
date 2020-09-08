@@ -1,7 +1,7 @@
-// Test to verify that the validate-format.arrOf format works as intended.
+// Test to verify that the validateformat.arrOf format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Not, Truthy } = require("../src/validate-format.js");
+const { Not, Truthy } = require("../src/validateformat.js");
 
 const notTruthy = new Not(new Truthy());
 

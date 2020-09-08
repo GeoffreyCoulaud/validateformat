@@ -1,4 +1,4 @@
-const { validate } = require('../src/validate-format.js');
+const { validate } = require('../src/validateformat.js');
 
 // tests : An array of testResults
 // return value : a percentage (0 to 1) giving pass proportion within tests

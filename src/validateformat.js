@@ -129,26 +129,33 @@ class Int extends Num{
 }
 
 // Strings go through
-// (you can specify a precise size, a min size, a max size and a regex. If size is not null, min and max will not be checked)
+// (you can specify a precise size, a min size, a max size, an alphabet and a regex. If size is not null, min and max will not be checked)
 class Str extends Format{
 	constructor(options){
 		super('string');
 
-		let size=null, min=null, max=null, regex=null;
+		let size=null, min=null, max=null, regex=null, alphabet=null;
 		if(typeof options === 'object'){
 			if(options.hasOwnProperty('size')){size=options.size}
 			if(options.hasOwnProperty('min')){min=options.min}
 			if(options.hasOwnProperty('max')){max=options.max}
 			if(options.hasOwnProperty('regex')){regex=options.regex}
+			if(options.hasOwnProperty('alphabet')){alphabet=options.alphabet}
 		}
 
 		this.size = size;
 		this.min = min;
 		this.max = max;
 		this.regex = regex;
+		this.alphabet = alphabet;
 		
 		this.match = function(obj){
 			if (!this.validateType(obj)){return false;}
+			if (this.alphabet !== null){
+				for (let letter of obj){
+					if (!this.alphabet.includes(letter)){return false;}
+				}
+			}
 			if (this.regex !== null){
 				if (!this.regex.test(obj)){return false;}
 			}

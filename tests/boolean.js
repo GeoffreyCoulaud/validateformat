@@ -1,7 +1,7 @@
-// Test to verify that the validate-format.truthy format works as intended.
+// Test to verify that the validateformat.truthy format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Bool } = require("../src/validate-format.js");
+const { Bool } = require("../src/validateformat.js");
 
 const t = new Bool();
 

@@ -1,7 +1,7 @@
-// Test to verify that the validate-format.arr format works as intended.
+// Test to verify that the validateformat.arr format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Arr } = require("../src/validate-format.js");
+const { Arr } = require("../src/validateformat.js");
 
 const anyArr = new Arr();
 const shortArr = new Arr({min: 5, max: 10});

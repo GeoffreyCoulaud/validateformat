@@ -1,7 +1,7 @@
-// Test to verify that the validate-format.falsy format works as intended.
+// Test to verify that the validateformat.falsy format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Falsy } = require("../src/validate-format.js");
+const { Falsy } = require("../src/validateformat.js");
 
 const t = new Falsy();
 

@@ -1,7 +1,7 @@
-// Test to verify that the validate-format.str format works as intended.
+// Test to verify that the validateformat.str format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Str } = require("../src/validate-format.js");
+const { Str } = require("../src/validateformat.js");
 
 const anyStr = new Str();
 const shortStr = new Str({min: 5, max: 10});
@@ -9,6 +9,7 @@ const preciseStr = new Str({size: 7});
 const minMaxPrecise = new Str({size: 7, min: 5, max: 10});
 const regexStr = new Str({regex: /foo(.*)bar/});
 const regexStrMinMax = new Str({regex: /foo(.*)bar/, min: 5, max : 20});
+const reducedAlphabetStr = new Str({alphabet: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"});
 
 // Values to test and their expected state
 const tests = [
@@ -24,6 +25,7 @@ const tests = [
 	new tr(new ti("foobar", regexStr, true, "Str with regexes match when strings match the regex option")),
 	new tr(new ti("foo something_else bar", regexStr, true,  "Str with regexes match when strings match the regex option")),
 	new tr(new ti("fooshortbar", regexStrMinMax, true, "Str with regex and min/max should apply both criteria")),
+	new tr(new ti("foobar", reducedAlphabetStr, true, "Str with only characters of given alphabet should match")),
 
 	// ### Evaluated to false :
 	// Obvious ones
@@ -39,6 +41,7 @@ const tests = [
 	new tr(new ti("123", preciseStr, false, "Strings of length diffenrent than size should not match")),
 	new tr(new ti("123", minMaxPrecise, false, "Exact length prevals over min/max")),
 	new tr(new ti("barfoo", regexStr, false, "Strings should match regexes")),
+	new tr(new ti("f00b4r", reducedAlphabetStr, false, "Strings containing at least one character not in alphabet should not match")),
 ];
 
 module.exports = {tests};

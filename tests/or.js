@@ -1,7 +1,7 @@
-// Test to verify that the validate-format.arrOf format works as intended.
+// Test to verify that the validateformat.arrOf format works as intended.
 
 const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Bool, Int, Or } = require("../src/validate-format.js");
+const { Bool, Int, Or } = require("../src/validateformat.js");
 
 const boolFormat = new Bool();
 const smallIntFormat = new Int({min: 0, max: 10});
