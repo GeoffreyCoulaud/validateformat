@@ -56,13 +56,13 @@ Parameters prefixed by a * are required.
 | Bool | obj is a boolean | `new val.Bool()` |
 | Num (`min`,`max`,`forceInt`) | obj is a number between `min` and `max` (included). If `forceInt` is `true`, obj is an integer  | `new val.Num({min: -5.2, max: 9.3})` |
 | Int (`min`,`max`) | obj is an integer between `min` and `max` (included) | `new val.Int({min: -1, max: 5})` |
-| Str (`size`,`min`,`max`,`regex`, `alphabet`) | obj is a string which length is `size` or between `min` and `max` (exact length prevals), matches `regex`, and only contains character of `alphabet`**\*** | `new val.Str({size: 20, regex: /^\[A-Z\].*\[\.?!\]/})` |
+| Str (`size`,`min`,`max`,`regex`, `alphabet`) | obj is a string which length is `size` or between `min` and `max` (exact length prevals), matches `regex`, and only contains character of `alphabet`**(1)** | `new val.Str({size: 20, regex: /^\[A-Z\].*\[\.?!\]/})` |
 | Arr (`size`,`min`,`max`) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) | `new val.Arr({size: 3})` |
 | ArrOf (\*`format`,`size`,`min`,`max`) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `format` | `new val.ArrOf({size: 2, format: new val.Num({min: -999, max: 999})})` |
 | Or (\*`formats`) | obj matches one of the formats in the given array `formats` | `new val.Or(new val.Bool(), new val.Specific(-1))` |
 | Not (\*`format`) | obj doesn't match the given `format` | `new val.Not(new val.Specific('Hello I am a hacking bot'))` |
 
-**\*** `alphabet` can be any iterable. You would want to use a string as it is more readable. 
+**(1)** `alphabet` can be any iterable. You would want to use a string as it is more readable. 
 
 ## How to add formats
 You can create your own formats simply by extending the `Format` class and precising the `match` method.
