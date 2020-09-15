@@ -1,6 +1,7 @@
 {
   "name": "validateformat",
-  "version": "2.0.0",
+  "version": "2.0.1",
+  "type": "module",
   "description": "Check if the given object matches a given format",
   "main": "src/validateformat.mjs",
   "scripts": {
