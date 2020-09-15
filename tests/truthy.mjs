@@ -1,12 +1,12 @@
 // Test to verify that the validateformat.truthy format works as intended.
 
-const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Truthy } = require("../src/validateformat.js");
+import { testAndReport, testResult as tr, testItem as ti } from "./test-suite.mjs";
+import { Truthy } from"../src/validateformat.mjs";
 
 const t = new Truthy();
 
 // Values to test and their expected state
-const tests = [
+export const tests = [
 
 	// ### Evaluated to true :
 	new tr(new ti(true, t, true, "true is truthy")),
@@ -30,9 +30,3 @@ const tests = [
 	new tr(new ti(0n, t, false, "0 (bigint) isn't truthy")),
 	new tr(new ti("", t, false, "empty strings aren't truthy")),
 ];
-
-module.exports = {tests};
-
-if (!module.parent){
-	testAndReport(tests);
-}

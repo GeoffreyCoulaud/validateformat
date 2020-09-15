@@ -1,14 +1,14 @@
 // Test to verify that the validateformat.int format works as intended.
 
-const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Int } = require("../src/validateformat.js");
+import { testAndReport, testResult as tr, testItem as ti } from "./test-suite.mjs";
+import { Int } from "../src/validateformat.mjs";
 
 const zeroTen = new Int({min: 0, max: 10});
 const zeroTenEx = new Int({min: 0, max: 10, strict: true});
 const allReal = new Int({min: -Infinity, max: Infinity});
 
 // Values to test and their expected state
-const tests = [
+export const tests = [
 
 	// ### Evaluated to true :
 	new tr(new ti(5, zeroTen, true, "Integers (clearly) between min and max should match")),
@@ -44,9 +44,3 @@ const tests = [
 	new tr(new ti(-2.5, zeroTen, false, "Decimal numbers should not match")),
 	new tr(new ti(10.0000001, zeroTen, false, "Decimal numbers should not match")),
 ];
-
-module.exports = {tests};
-
-if (!module.parent){
-	testAndReport(tests);
-}

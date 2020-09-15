@@ -5,7 +5,7 @@
 ## Installation
 You can download validateformat via npm
 ```
-npm install --save validateformat
+npm i -S validateformat
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ The options and usage for built-in formats are given down below.
 
 ### Validating a simple string
 ```js
-const val = require('validateformat');
+import { validate as val } from 'validateformat';
 const myObject = 'foobar'; 
 const myFormat = new val.Str({'regex':/^f.+r$/});
 const doesThisMatch = val.validate(myObject, myFormat);
@@ -24,7 +24,7 @@ console.log(doesThisMatch); // <----------- true
 
 ### Validating a more complex object
 ```js
-const val = require('validateformat');
+import { validate as val } from 'validateformat';
 const myObject = {
 	name: 'Geoffrey Coulaud',
 	coolness: 9001,
@@ -70,7 +70,7 @@ You can create your own formats simply by extending the `Format` class and preci
 Lets say you recieve two values from the user, a lowest price (min) and a highest price (max) to filter a database search.
 The minimum price can't be lower than 0, and the maximum price can't be higher than 100, our most expensive product of all time.
 ```js
-const val = require('validateformat');
+import { validate as val } from 'validateformat';
 const MAX_PRICE_OF_ALL_TIME = 100;
 class MinMaxFormat extends val.Format{
 	constructor({min = null, max = null}){
@@ -94,31 +94,26 @@ console.log(doesThisMatch); // <----------- true
 ## How to run the tests and add some
 In the project folder, run `npm run test` or `npm run test-verbose` to run tests.  
 To add tests, copy and paste one of the already existing test files in `tests` and rename it. Follow the given syntax, and everything should be fine.
-Don't forget to import it in `tests/main.js` for it to be added to the global tests or you'll have to type `node ./tests/name_of_your_test.js` to run it.
+Don't forget to import it in `tests/main.js` for it to be added to the global tests.
 
 ### Base test file syntax
 Replace everything between `<>` accordingly.
 ```js 
 // <TEST_FILE_DESCRIPTION>
 
-const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { <TESTED_FORMAT> } = require("../src/validateformat.js");
+import { testAndReport, testResult as tr, testItem as ti } from "./test-suite.mjs";
+import { <TESTED_FORMAT> } from "../src/validateformat.mjs");
 
 const <MY_TESTED_FORMAT_1> = new <TESTED_FORMAT>(<OPTIONS>);
 const <MY_TESTED_FORMAT_2> = new <TESTED_FORMAT>(<OPTIONS_2>);
 
 // Values to test and their expected state
-const tests = [
+export const tests = [
 
 	// ### Evaluated to true :
 	new tr(new ti(<TEST_VALUE_1>, <MY_TESTED_FORMAT_1>, <BOOL_EXPECTED_OUTPUT>, "<TEST_DESC>")),
 
 	// ### Evaluated to false :
-	new tr(new ti(<TEST_VALUE_2>, <MY_TESTED_FORMAT_2>, <BOOL_EXPECTED_OUTPUT>, "<TEST_DESC>")),];
-
-module.exports = {tests};
-
-if (!module.parent){
-	testAndReport(tests);
-}
+	new tr(new ti(<TEST_VALUE_2>, <MY_TESTED_FORMAT_2>, <BOOL_EXPECTED_OUTPUT>, "<TEST_DESC>")),
+];
 ```

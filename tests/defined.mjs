@@ -1,13 +1,13 @@
 // Test to verify that the validateformat.defined format works as intended.
 
-const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Defined } = require("../src/validateformat.js");
+import { testAndReport, testResult as tr, testItem as ti } from "./test-suite.mjs";
+import { Defined } from "../src/validateformat.mjs";
 
 // Format to test
 const f = new Defined();
 
 // Values to test and their expected state
-const tests = [
+export const tests = [
 
 	// ### Evaluated to false :
 	// undefined.
@@ -33,9 +33,3 @@ const tests = [
 	new tr(new ti({foo: "bar"}, f, true, "Everything else than undefined is defined")),
 
 ];
-
-module.exports = {tests};
-
-if (!module.parent){
-	testAndReport(tests);
-}

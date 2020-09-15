@@ -1,7 +1,7 @@
 // Test to verify that the validateformat.arr format works as intended.
 
-const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Arr } = require("../src/validateformat.js");
+import { testAndReport, testResult as tr, testItem as ti } from "./test-suite.mjs";
+import { Arr } from "../src/validateformat.mjs";
 
 const anyArr = new Arr();
 const shortArr = new Arr({min: 5, max: 10});
@@ -9,7 +9,7 @@ const preciseArr = new Arr({size: 7});
 const minMaxPrecise = new Arr({size: 7, min: 5, max: 10});
 
 // Values to test and their expected state
-const tests = [
+export const tests = [
 
 	// ### Evaluated to true :
 	new tr(new ti([], anyArr, true, "Empty Arr should match any array")),
@@ -35,9 +35,3 @@ const tests = [
 	new tr(new ti([1,2,3,4,5,6], preciseArr, false, "Precie length prevals over min/max")),
 	
 ];
-
-module.exports = {tests};
-
-if (!module.parent){
-	testAndReport(tests);
-}

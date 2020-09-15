@@ -1,12 +1,12 @@
 // Test to verify that the validateformat.truthy format works as intended.
 
-const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Bool } = require("../src/validateformat.js");
+import { testAndReport, testResult as tr, testItem as ti } from "./test-suite.mjs";
+import { Bool } from"../src/validateformat.mjs";
 
 const t = new Bool();
 
 // Values to test and their expected state
-const tests = [
+export const tests = [
 
 	// ### Evaluated to true :
 	new tr(new ti(true, t, true, "true is a boolean")),
@@ -29,9 +29,3 @@ const tests = [
 	new tr(new ti({foo: "bar"}, t, false, "only `true` and `false` are booleans")),
 	new tr(new ti([1,2,3], t, false, "only `true` and `false` are booleans")),
 ];
-
-module.exports = {tests};
-
-if (!module.parent){
-	testAndReport(tests);
-}

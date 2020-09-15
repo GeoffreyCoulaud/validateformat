@@ -1,8 +1,8 @@
-const { validate } = require('../src/validateformat.js');
+import { validate } from '../src/validateformat.mjs';
 
 // tests : An array of testResults
 // return value : a percentage (0 to 1) giving pass proportion within tests
-function testAndReport(tests){
+export function testAndReport(tests){
 	
 	let resCount = {pass: 0, fail: 0}
 
@@ -48,7 +48,7 @@ function testAndReport(tests){
 // format : The format that value will be subjected to (format object | object)
 // expected : The boolean value expected as output of validate function with input value and format (true, false)
 // humanDesc : A string containing a short description of what the tests does
-class testItem {
+export class testItem {
     constructor(value, format, expected, humanDesc = ""){
         this.value = value;
         this.format = format;
@@ -58,7 +58,7 @@ class testItem {
 }
 // Input : a testItem object
 // Output : a boolean indicating that the input test succeeded (true) or failed (false)
-class testResult{
+export class testResult{
 	constructor(input, output = null){
 		this.input = input;
 		this.output = output;
@@ -69,5 +69,3 @@ class testResult{
 		}
 	}
 }
-
-module.exports = {testAndReport, testItem, testResult};

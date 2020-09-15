@@ -1,10 +1,10 @@
 // Test to verify that the validateformat.specific format works as intended.
 
-const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Specific } = require("../src/validateformat.js");
+import { testAndReport, testResult as tr, testItem as ti } from "./test-suite.mjs";
+import { Specific } from "../src/validateformat.mjs";
 
 // Values to test and their expected state
-const tests = [
+export const tests = [
 
 	// ### Evaluated to true :
 	// NaN and null
@@ -32,9 +32,3 @@ const tests = [
 	new tr(new ti({}, new Specific(false), false, "Specific format should not convert types")),
 	new tr(new ti([{}], new Specific(false), false, "Specific format should not convert types")),
 ];
-
-module.exports = {tests};
-
-if (!module.parent){
-	testAndReport(tests);
-}

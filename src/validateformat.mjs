@@ -1,5 +1,5 @@
 // Master Class
-class Format{
+export class Format{
 	constructor(type = 'object'){
 		this.type = type;
 		this.validateType = function(obj){
@@ -24,7 +24,7 @@ class Format{
 }
 
 // Anything goes through, it just needs to be defined
-class Defined extends Format{
+export class Defined extends Format{
 	constructor(){
 		super('object');
 		this.match = function(obj){
@@ -35,7 +35,7 @@ class Defined extends Format{
 
 // Just a specific value goes through
 const SpecificSupportedTypes = ["undefined", "boolean", "number", "bigint", "string"];
-class Specific extends Format{
+export class Specific extends Format{
 	constructor(value){
 		
 		// Check type of the specific value
@@ -56,7 +56,7 @@ class Specific extends Format{
 }
 
 // Anything truthy goes through
-class Truthy extends Format{
+export class Truthy extends Format{
 	constructor(){
 		super('object');
 		this.match = function(obj){
@@ -66,7 +66,7 @@ class Truthy extends Format{
 }
 
 // Anything falsy goes through
-class Falsy extends Format{
+export class Falsy extends Format{
 	constructor(){
 		super('object');
 		this.match = function(obj){
@@ -76,7 +76,7 @@ class Falsy extends Format{
 }
 
 // Booleans go through
-class Bool extends Format{
+export class Bool extends Format{
 	constructor(){
 		super('boolean');
 		this.match = this.validateType;
@@ -85,7 +85,7 @@ class Bool extends Format{
 
 // Numbers go through
 // (You can specify a min, max and force integer or not)
-class Num extends Format{
+export class Num extends Format{
 	constructor(options){
 		super('number');
 		
@@ -121,7 +121,7 @@ class Num extends Format{
 
 // Integers go through
 // (You can specify a min and a max)
-class Int extends Num{
+export class Int extends Num{
 	constructor(options){
 		options.forceInt = true;
 		super(options);
@@ -130,7 +130,7 @@ class Int extends Num{
 
 // Strings go through
 // (you can specify a precise size, a min size, a max size, an alphabet and a regex. If size is not null, min and max will not be checked)
-class Str extends Format{
+export class Str extends Format{
 	constructor(options){
 		super('string');
 
@@ -173,7 +173,7 @@ class Str extends Format{
 
 // Arrays go through
 // (You can specify a size, a min size and a max size, if size is not null, min and max will not be checked)
-class Arr extends Format{
+export class Arr extends Format{
 	constructor(options){
 		super('array');
 
@@ -203,7 +203,7 @@ class Arr extends Format{
 
 // Arrays of specific things go through
 // (Same parameters as Arr, plus insideFormat against all items of the array will be checked)
-class ArrOf extends Arr{
+export class ArrOf extends Arr{
 	constructor(options){
 		
 		let size=null, min=null, max=null;
@@ -228,7 +228,7 @@ class ArrOf extends Arr{
 }
 
 // Any of the given formats goes through
-class Or extends Format{
+export class Or extends Format{
 	constructor(){
 		super('object');
 		this.formats = Array.from(arguments);
@@ -242,7 +242,7 @@ class Or extends Format{
 }
 
 // Anything not validating the given format goes through
-class Not extends Format{
+export class Not extends Format{
 	constructor(format){
 		super('object');
 		this.format = format;
@@ -252,7 +252,7 @@ class Not extends Format{
 	}
 }
 
-function validate(obj, format){
+export function validate(obj, format){
 	// If format is a Format
 	if (format instanceof Format){
 		// Test if obj matches format
@@ -272,33 +272,4 @@ function validate(obj, format){
 			}
 		}
 	} 
-}
-
-// -----------------------------------------------------------
-// Exporting
-// -----------------------------------------------------------
-
-// Older browser method
-const ValidateFormat = {
-	'Format': Format,
-
-	'Specific': Specific,
-	'Defined': Defined,
-	'Truthy': Truthy,
-	'Falsy': Falsy,
-	'ArrOf': ArrOf,
-	'Bool': Bool,
-	'Num': Num,
-	'Int': Int,
-	'Str': Str,
-	'Arr': Arr,
-	'Not': Not,
-	'Or': Or,
-
-	'validate': validate
-};
-
-// Modern modules method
-if (typeof module !== 'undefined'){
-	module.exports = ValidateFormat;
 }

@@ -1,12 +1,12 @@
 // Test to verify that the validateformat.falsy format works as intended.
 
-const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Falsy } = require("../src/validateformat.js");
+import { testAndReport, testResult as tr, testItem as ti } from "./test-suite.mjs";
+import { Falsy } from "../src/validateformat.mjs";
 
 const t = new Falsy();
 
 // Values to test and their expected state
-const tests = [
+export const tests = [
 
 	// ### Evaluated to false :
 	new tr(new ti(true, t, false, "true is truthy")),
@@ -30,9 +30,3 @@ const tests = [
 	new tr(new ti(0n, t, true, "0 (bigint) isn't truthy")),
 	new tr(new ti("", t, true, "empty strings aren't truthy")),
 ];
-
-module.exports = {tests};
-
-if (!module.parent){
-	testAndReport(tests);
-}

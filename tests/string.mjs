@@ -1,7 +1,7 @@
 // Test to verify that the validateformat.str format works as intended.
 
-const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { Str } = require("../src/validateformat.js");
+import { testAndReport, testResult as tr, testItem as ti } from "./test-suite.mjs";
+import { Str } from "../src/validateformat.mjs";
 
 const anyStr = new Str();
 const shortStr = new Str({min: 5, max: 10});
@@ -12,7 +12,7 @@ const regexStrMinMax = new Str({regex: /foo(.*)bar/, min: 5, max : 20});
 const reducedAlphabetStr = new Str({alphabet: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"});
 
 // Values to test and their expected state
-const tests = [
+export const tests = [
 
 	// ### Evaluated to true :
 	new tr(new ti("Hello world !", anyStr, true, "Empty Str should match any string")),
@@ -43,9 +43,3 @@ const tests = [
 	new tr(new ti("barfoo", regexStr, false, "Strings should match regexes")),
 	new tr(new ti("f00b4r", reducedAlphabetStr, false, "Strings containing at least one character not in alphabet should not match")),
 ];
-
-module.exports = {tests};
-
-if (!module.parent){
-	testAndReport(tests);
-}

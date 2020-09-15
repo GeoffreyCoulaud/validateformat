@@ -1,7 +1,7 @@
 // Test to verify that the validateformat.arrOf format works as intended.
 
-const { testAndReport, testResult: tr, testItem: ti } = require("./test-suite.js");
-const { ArrOf, Int } = require("../src/validateformat.js");
+import { testAndReport, testResult as tr, testItem as ti } from "./test-suite.mjs";
+import { ArrOf, Int } from "../src/validateformat.mjs";
 
 const smallInt = new Int({min: 0, max: 10})
 const arrOfSmallInt = new ArrOf({format: smallInt});
@@ -10,7 +10,7 @@ const preciseArrOfSmallInt = new ArrOf({format: smallInt, size: 3});
 const preciseMinMaxArrOfSmallInt = new ArrOf({format: smallInt, size: 3, min: 1, max: 10});
 
 // Values to test and their expected state
-const tests = [
+export const tests = [
 
 	// ### Evaluated to true :
 	new tr(new ti([1,2,3], arrOfSmallInt, true, "An array of small integers should match arrof(int(min0max10))")),
@@ -36,9 +36,3 @@ const tests = [
 	new tr(new ti([1,2,3,4,5,6], preciseMinMaxArrOfSmallInt, false, "Precie length prevals over min/max")),
 	
 ];
-
-module.exports = {tests};
-
-if (!module.parent){
-	testAndReport(tests);
-}
