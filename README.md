@@ -15,16 +15,16 @@ The options and usage for built-in formats are given down below.
 
 ### Validating a simple string
 ```js
-import { validate as val } from 'validateformat';
+import { validate, Str } from 'validateformat';
 const myObject = 'foobar'; 
-const myFormat = new val.Str({'regex':/^f.+r$/});
-const doesThisMatch = val.validate(myObject, myFormat);
+const myFormat = new Str({'regex':/^f.+r$/});
+const doesThisMatch = validate(myObject, myFormat);
 console.log(doesThisMatch); // <----------- true
 ```
 
 ### Validating a more complex object
 ```js
-import { validate as val } from 'validateformat';
+import { validate, Str, Num, ArrOf } from 'validateformat';
 const myObject = {
 	name: 'Geoffrey Coulaud',
 	coolness: 9001,
@@ -36,11 +36,11 @@ const myObject = {
 };
 // You can have sub-formats
 const myFormat = {
-	name: new val.Str({min: 1, max: 256}),
-	coolness: new val.Num({min: 0, max: 9000}),
-	interests: new val.ArrOf({format: new val.Str({min: 1, max: 256})})
+	name: new Str({min: 1, max: 256}),
+	coolness: new Num({min: 0, max: 9000}),
+	interests: new ArrOf({format: new Str({min: 1, max: 256})})
 };
-const doesThisMatch = val.validate(myObject, myFormat);
+const doesThisMatch = validate(myObject, myFormat);
 console.log(doesThisMatch); // <----------- false (coolness is over 9000)
 ```
 
@@ -49,18 +49,18 @@ Parameters prefixed by a * are required.
 
 | name (parameters) | condition for obj to match | example |
 | ----------------- | -------------------------- | ------- |
-| Defined | obj is not undefined | `new val.Defined()` |
-| Specific | obj is a given value | `new val.Specific(4)` |
-| Thruthy | obj is truthy | `new val.Truthy()` | 
-| Falsy | obj is falsy | `new val.Falsy()` |
-| Bool | obj is a boolean | `new val.Bool()` |
-| Num (`min`,`max`,`forceInt`) | obj is a number between `min` and `max` (included). If `forceInt` is `true`, obj is an integer  | `new val.Num({min: -5.2, max: 9.3})` |
-| Int (`min`,`max`) | obj is an integer between `min` and `max` (included) | `new val.Int({min: -1, max: 5})` |
-| Str (`size`,`min`,`max`,`regex`, `alphabet`) | obj is a string which length is `size` or between `min` and `max` (exact length prevals), matches `regex`, and only contains character of `alphabet`**(1)** | `new val.Str({size: 20, regex: /^\[A-Z\].*\[\.?!\]/})` |
-| Arr (`size`,`min`,`max`) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) | `new val.Arr({size: 3})` |
-| ArrOf (\*`format`,`size`,`min`,`max`) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `format` | `new val.ArrOf({size: 2, format: new val.Num({min: -999, max: 999})})` |
-| Or (\*`formats`) | obj matches one of the formats in the given array `formats` | `new val.Or(new val.Bool(), new val.Specific(-1))` |
-| Not (\*`format`) | obj doesn't match the given `format` | `new val.Not(new val.Specific('Hello I am a hacking bot'))` |
+| Defined | obj is not undefined | `new Defined()` |
+| Specific | obj is a given value | `new Specific(4)` |
+| Thruthy | obj is truthy | `new Truthy()` | 
+| Falsy | obj is falsy | `new Falsy()` |
+| Bool | obj is a boolean | `new Bool()` |
+| Num (`min`,`max`,`forceInt`) | obj is a number between `min` and `max` (included). If `forceInt` is `true`, obj is an integer  | `new Num({min: -5.2, max: 9.3})` |
+| Int (`min`,`max`) | obj is an integer between `min` and `max` (included) | `new Int({min: -1, max: 5})` |
+| Str (`size`,`min`,`max`,`regex`, `alphabet`) | obj is a string which length is `size` or between `min` and `max` (exact length prevals), matches `regex`, and only contains character of `alphabet`**(1)** | `new Str({size: 20, regex: /^\[A-Z\].*\[\.?!\]/})` |
+| Arr (`size`,`min`,`max`) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) | `new Arr({size: 3})` |
+| ArrOf (\*`format`,`size`,`min`,`max`) | obj is an array which length is `size` or between `min` and `max` (exact length prevals) and its items all match `format` | `new ArrOf({size: 2, format: new Num({min: -999, max: 999})})` |
+| Or (\*`formats`) | obj matches one of the formats in the given array `formats` | `new Or(new Bool(), new Specific(-1))` |
+| Not (\*`format`) | obj doesn't match the given `format` | `new Not(new Specific('Hello I am a hacking bot'))` |
 
 **(1)** `alphabet` can be any iterable. You would want to use a string as it is more readable. 
 
@@ -70,13 +70,13 @@ You can create your own formats simply by extending the `Format` class and preci
 Lets say you recieve two values from the user, a lowest price (min) and a highest price (max) to filter a database search.
 The minimum price can't be lower than 0, and the maximum price can't be higher than 100, our most expensive product of all time.
 ```js
-import { validate as val } from 'validateformat';
+import { validate, Format, Num } from 'validateformat';
 const MAX_PRICE_OF_ALL_TIME = 100;
-class MinMaxFormat extends val.Format{
+class MinMaxFormat extends Format{
 	constructor({min = null, max = null}){
 		super('object'); // Precising the js type expected
-		this.min = new val.Num({'min':0, 'max':max});
-		this.max = new val.Num({'min':min, 'max':Number.MAX_SAFE_INTEGER});
+		this.min = new Num({'min':0, 'max':max});
+		this.max = new Num({'min':min, 'max':Number.MAX_SAFE_INTEGER});
 		this.match = function(obj){
 			if (!this.validateType()){return false;}
 			if (typeof obj.min !== 'number'){return false;}
@@ -87,7 +87,7 @@ class MinMaxFormat extends val.Format{
 }
 const userCriteria = {'min':0, 'max':25};
 const userCriteriaFormat = new MinMaxFormat({'min':0, 'max':MAX_PRICE_OF_ALL_TIME});
-const doesThisMatch = val.validate(myObj, myFormat);
+const doesThisMatch = validate(myObj, myFormat);
 console.log(doesThisMatch); // <----------- true
 ```
 
